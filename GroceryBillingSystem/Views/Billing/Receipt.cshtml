@@ -1,0 +1,57 @@
+﻿@model GroceryBillingSystem.Models.Bill
+@{
+    ViewData["Title"] = "Receipt";
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<h2>Bill Receipt</h2>
+
+<div class="card mt-3">
+    <div class="card-header bg-primary text-white">
+        <div class="d-flex justify-content-between">
+            <span><strong>Customer:</strong> @Model.Customer.Name</span>
+            <span><strong>Date:</strong> @Model.Date.ToString("dd-MM-yyyy HH:mm")</span>
+        </div>
+    </div>
+    <div class="card-body">
+        <p><strong>Mobile:</strong> @Model.Customer.MobileNumber</p>
+        <p><strong>Address:</strong> @Model.Customer.Address</p>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Rate</th>
+                    <th>Qty</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.BillItems)
+                {
+                    <tr>
+                        <td>@item.Product?.Name</td>
+                        <td>₹@item.Rate</td>
+                        <td>@item.Quantity</td>
+                        <td>₹@item.Total</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <p><strong>Discount:</strong> ₹@Model.Discount</p> 
+        <p><strong>Total:</strong> ₹@Model.TotalAmount</p>
+        <p><strong>Final Amount:</strong> ₹@Model.FinalAmount</p>
+
+        <hr />
+        <div class="d-flex gap-3">
+            <a class="btn btn-primary" onclick="window.print()">🖨️ Print Receipt</a>
+            <a asp-action="Bills" class="btn btn-secondary">📋 View All Bills</a>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-dark">🏠 Back to Dashboard</a>
+        </div>
+    </div>
+</div>

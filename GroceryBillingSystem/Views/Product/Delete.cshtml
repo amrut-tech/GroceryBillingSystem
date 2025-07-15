@@ -1,0 +1,19 @@
+﻿@model GroceryBillingSystem.Models.Product
+@{
+    ViewData["Title"] = "Delete Product";
+}
+
+<h2>Delete Product</h2>
+
+<div>
+    <h4>Are you sure you want to delete this product?</h4>
+    <p><strong>Name:</strong> @Model.Name</p>
+    <p><strong>Rate:</strong> @Model.Rate</p>
+    <p><strong>Quantity:</strong> @Model.Quantity</p>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="ProductId" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="/Product" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

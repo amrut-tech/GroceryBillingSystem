@@ -1,0 +1,21 @@
+﻿@model GroceryBillingSystem.Models.Product
+
+<h2>Edit Product</h2>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="ProductId" />
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Rate</label>
+        <input asp-for="Rate" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Quantity</label>
+        <input asp-for="Quantity" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-success">Update</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<GroceryBillingSystem.Models.Bill>
+@{
+    ViewData["Title"] = "Billing History";
+}
+
+<h2>Billing History</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning">No bills found. Please create a new bill.</div>
+}
+else
+{
+    @foreach (var bill in Model)
+    {
+        <div class="card mb-3 shadow-sm">
+            <div class="card-header bg-dark text-white d-flex justify-content-between">
+                <span><strong>Customer:</strong> @bill.Customer?.Name</span>
+                <span><strong>Date:</strong> @bill.Date.ToString("dd-MM-yyyy HH:mm")</span>
+            </div>
+            <div class="card-body">
+                <p><strong>Mobile:</strong> @bill.Customer?.MobileNumber</p>
+                <p><strong>Address:</strong> @bill.Customer?.Address</p>
+
+                <table class="table table-bordered">
+                    <thead class="table-secondary">
+                        <tr>
+                            <th>Product</th>
+                            <th>Rate</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in bill.BillItems)
+                        {
+                            <tr>
+                                <td>@item.Product?.Name</td>
+                                <td>₹@item.Rate</td>
+                                <td>@item.Quantity</td>
+                                <td>₹@item.Total</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <p><strong>Discount:</strong> ₹@bill.Discount</p>
+                <p><strong>Total Amount:</strong> ₹@bill.TotalAmount</p>
+                <p><strong>Final Amount:</strong> ₹@bill.FinalAmount</p>
+            </div>
+        </div>
+    }
+}

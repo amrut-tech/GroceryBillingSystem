@@ -1,0 +1,60 @@
+﻿@model GroceryBillingSystem.Models.Bill
+@{
+    ViewData["Title"] = "Create Bill";
+    var products = ViewBag.Products as List<GroceryBillingSystem.Models.Product>;
+}
+
+<h2 class="mb-4">Create New Bill</h2>
+
+<form asp-action="Create" method="post">
+    <h4 class="mt-3">Customer Details</h4>
+
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input name="Customer.Name" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Mobile Number</label>
+        <input name="Customer.MobileNumber" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Address</label>
+        <textarea name="Customer.Address" class="form-control" required></textarea>
+    </div>
+
+    <h4 class="mt-4">Select Products</h4>
+
+    <table class="table table-bordered">
+        <thead class="table-secondary">
+            <tr>
+                <th>Product</th>
+                <th>Available Qty</th>
+                <th>Rate (₹)</th>
+                <th>Quantity to Buy</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < products.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @products[i].Name
+                        <input type="hidden" name="productIds[@i]" value="@products[i].ProductId" />
+                    </td>
+                    <td>@products[i].Quantity</td>
+                    <td>₹@products[i].Rate</td>
+                    <td>
+                        <input type="number" name="quantities[@i]" class="form-control" min="0" value="0" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="mb-3">
+        <label class="form-label">Discount (%)</label>
+        <input type="number" name="discount" class="form-control" value="0" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Generate Bill</button>
+</form>

@@ -1,0 +1,22 @@
+﻿@model GroceryBillingSystem.Models.Product
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<h2>Add New Product</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label>Name</label>
+        <input asp-for="Name" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label>Rate (₹)</label>
+        <input asp-for="Rate" type="number" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label>Quantity</label>
+        <input asp-for="Quantity" type="number" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+</form>
